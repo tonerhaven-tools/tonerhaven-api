@@ -33,7 +33,7 @@ app.get("/api/test", (request, response) => {
 });
 
 
-app.get("/api/users", Auth, (request, response) => {
+app.get("/api/users", (request, response) => {
     Database('users').select().then((rows) => {
         response.json(rows);
     }).catch((error) => {
