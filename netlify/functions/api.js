@@ -1,9 +1,11 @@
 
 const express    = require("express");
 const app        = express();
-const Database   = require("./configs/knexfile");
-const UsersModel = require("./models/UsersModel");
-const Auth       = require('./models/Auth');
+const Database   = require("../../configs/knexfile");
+const UsersModel = require("../../models/UsersModel");
+const Auth       = require("../../models/Auth");
+const swaggerDocument = require('../../swagger.json');
+
 const server_port = 3001;
 
 const serverless = require('serverless-http');
@@ -12,7 +14,6 @@ let dotenv = require('dotenv').config();
 
 //Swagger definitions
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
