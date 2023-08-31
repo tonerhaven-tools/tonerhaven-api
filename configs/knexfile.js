@@ -1,4 +1,6 @@
 const knex = require('knex');
+const Config   = require('../configs/application');
+
 let dotenv = require('dotenv').config()
 
 const knexConfig = {
@@ -6,10 +8,10 @@ const knexConfig = {
         client: 'mysql',
         version: '8.1',
         connection: {
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            password: process.env.DB_PW,
-            database: process.env.DB_NAME,
+            host: Config.DB_HOST,
+            user: Config.DB_USER,
+            password: Config.DB_PW,
+            database: Config.DB_NAME,
             requestTimeout: 1000000,
             port: 3306,
         },
