@@ -1,12 +1,12 @@
 
-
-
 const express    = require("express");
 const app        = express();
 const Database   = require("./configs/knexfile");
 const UsersModel = require("./models/UsersModel");
 const Auth       = require('./models/Auth');
+const server_port = 3001;
 
+const serverless = require('serverless-http');
 //Environment Variables
 let dotenv = require('dotenv').config();
 
@@ -14,7 +14,7 @@ let dotenv = require('dotenv').config();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -49,6 +49,10 @@ app.post("/api/users/logout", async (request, response) => {
 
 
 /** Node Server Log **/
-app.listen(3001, () => {
-    console.log("Server is running on port http://127.0.0.1:3001");
+app.listen(server_port, () => {
+    console.log("Server is running on port http://127.0.0.1:3001/swagger");
 });
+
+
+
+module.exports.handler = serverless(app);
