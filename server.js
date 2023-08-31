@@ -6,6 +6,8 @@ const UsersModel = require("./models/UsersModel");
 const Auth       = require('./models/Auth');
 const server_port = 3001;
 
+const APP_CONFIG = require("./configs/application");
+
 //Environment Variables
 let dotenv = require('dotenv').config();
 const serverless = require('serverless-http');
@@ -24,6 +26,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/api", (request, response) => {
     response.json("You've reached Express backend.");
+});
+
+app.get("/api/test", (request, response) => {
+    response.json(APP_CONFIG.DB_USER);
 });
 
 
