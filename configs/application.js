@@ -1,3 +1,6 @@
+let dotenv = require('dotenv').config()
+
+
 const APP_CONFIG = {
     SECRET_KEY: process.env.SECRET_KEY,
     DB_HOST: process.env.DB_HOST,

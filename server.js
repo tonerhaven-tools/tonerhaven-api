@@ -6,9 +6,10 @@ const UsersModel = require("./models/UsersModel");
 const Auth       = require('./models/Auth');
 const server_port = 3001;
 
-const serverless = require('serverless-http');
 //Environment Variables
 let dotenv = require('dotenv').config();
+const serverless = require('serverless-http');
+
 
 //Swagger definitions
 const swaggerUi = require('swagger-ui-express');
@@ -55,4 +56,4 @@ app.listen(server_port, () => {
 
 
 
-module.exports.handler = serverless(app);
+// module.exports.handler = serverless(app);

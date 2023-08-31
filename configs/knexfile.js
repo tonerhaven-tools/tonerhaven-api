@@ -1,7 +1,6 @@
 const knex = require('knex');
 const Config   = require('../configs/application');
 
-let dotenv = require('dotenv').config()
 
 const knexConfig = {
     development: {
