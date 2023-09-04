@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 const server_port = 3001;
-const user_routes = require("./controllers/users");
+const user_routes = require("./controllers/user_controller");
 
 //Environment Variables
 const serverless = require("serverless-http");
