@@ -1,65 +1,33 @@
+const express = require("express");
+const app = express();
 
-const express    = require("express");
-const app        = express();
-const Database   = require("./configs/knexfile");
-const UsersModel = require("./models/UsersModel");
-const Auth       = require('./models/Auth');
 const server_port = 3001;
-
-const APP_CONFIG = require("./configs/application");
+const user_routes = require("./controllers/users");
 
 //Environment Variables
-let dotenv = require('dotenv').config();
-const serverless = require('serverless-http');
-
+const serverless = require("serverless-http");
 
 //Swagger definitions
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//Controllers / routes
+app.use("/api/users", user_routes);
+
 /*** ROUTES ***/
 
 app.get("/api", (request, response) => {
-    response.json("You've reached Express backend.");
+  response.json("You've reached Express backend.");
 });
-
-app.get("/api/test", (request, response) => {
-    response.json(APP_CONFIG.DB_USER);
-});
-
-
-app.get("/api/users", (request, response) => {
-    Database('users').select().then((rows) => {
-        response.json(rows);
-    }).catch((error) => {
-        console.error(error);
-        response.status(500).json({ error: 'Internal server error' });
-    });
-});
-app.post("/api/users/login", async (request, response) => {
-    const users = new UsersModel(request, response);
-    return await users.login();
-});
-app.post("/api/users/register", async (request, response) => {
-    const users = new UsersModel(request, response);
-    return await users.register();
-});
-app.post("/api/users/logout", async (request, response) => {
-    const users = new UsersModel(request, response);
-    return await users.logout();
-});
-
 
 /** Node Server Log **/
 app.listen(server_port, () => {
-    console.log("Server is running on port http://127.0.0.1:3001/swagger");
+  console.log(`App started`);
 });
-
-
 
 module.exports.handler = serverless(app);
