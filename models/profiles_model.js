@@ -1,21 +1,26 @@
 const ModelBase = require("./base/model_base");
 
-class ProductsModel extends ModelBase {
+class ProfilesModel extends ModelBase {
   constructor(request, response) {
     //define table name, request object, response object
-    super("toners_parts", request, response);
+    super("profiles", request, response);
   }
 
-  async all_products() {
+  async ping() {
     this.table
+      .where("auth_id", this.request.params.id)
       .select()
-      .then((rows) => {
-        this.response.json(rows);
-      })
+      .then((rows) =>
+        this.response.json({
+          exists: rows.length > 0,
+        })
+      )
       .catch((error) => {
         console.error(error);
         this.response.status(500).json({ error: "Internal server error" });
       });
   }
+
+  async addUpdate() {}
 }
-module.exports = ProductsModel;
+module.exports = ProfilesModel;

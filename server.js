@@ -1,11 +1,14 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
+const serverless = require("serverless-http");
 
+//
+const app = express();
+var path = require("path");
 const server_port = 3001;
 const brands_routes = require("./controllers/brands_controller");
 const products_routes = require("./controllers/products_controller");
-const serverless = require("serverless-http");
+const profile_routes = require("./controllers/profiles_controller");
 
 //Swagger definitions
 const swaggerUi = require("swagger-ui-express");
@@ -19,9 +22,10 @@ app.use(express.urlencoded({ extended: true }));
 /*** ROUTES > Controllers ***/
 app.use("/api/brands", brands_routes);
 app.use("/api/products", products_routes);
+app.use("/api/profiles", profile_routes);
 
 // Serve files inside storage
-app.use("/api/storage", express.static(`${__dirname}/storage`));
+app.use("/api/storage", express.static(path.join(__dirname, "storage")));
 
 /** Node Server Log **/
 app.listen(server_port, () => {

@@ -1,21 +1,20 @@
-const DB = require('../configs/database/DB');
+const ModelBase = require("./base/model_base");
 
-class BrandsModel {
-  request  = null;
-  response = null;
-
+class BrandsModel extends ModelBase {
   constructor(request, response) {
-    this.request = request;
-    this.response = response;
+    super(printer_brands, request, response);
   }
 
   async all_brands() {
-    DB("th_printer_brands").select().then((rows) => {
-      this.response.json(rows);
-    }).catch((error) => {
-      console.error(error);
-      this.response.status(500).json({error: "Internal server error"});
-    });
+    this.table
+      .select()
+      .then((rows) => {
+        this.response.json(rows);
+      })
+      .catch((error) => {
+        console.error(error);
+        this.response.status(500).json({ error: "Internal server error" });
+      });
   }
 }
 module.exports = BrandsModel;
