@@ -2,8 +2,6 @@ const DB = require("../../configs/database/DB");
 
 //acts as base definition for models
 class ModelBase {
-  request = {};
-
   constructor(table, req, res) {
     const table_name = this.get_table_name(table);
     //assign table name, request object, response object
