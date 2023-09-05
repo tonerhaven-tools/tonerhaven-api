@@ -8,11 +8,12 @@ class ProfilesModel extends ModelBase {
 
   async ping() {
     this.table
-      .where("auth_id", this.request.params.id)
+      .where("auth_id", this.request.params.authId)
       .select()
-      .then((rows) =>
+      .first()
+      .then((response) =>
         this.response.json({
-          exists: rows.length > 0,
+          exists: response != undefined,
         })
       )
       .catch((error) => {
@@ -21,6 +22,29 @@ class ProfilesModel extends ModelBase {
       });
   }
 
-  async addUpdate() {}
+  async add() {
+    this.table
+      .insert(this.request.body)
+      .then((resp) =>
+        this.response.status(201).json({
+          id: resp[0],
+        })
+      )
+      .catch((error) => {
+        console.error(error);
+        this.response.status(500).json({ error: "Internal server error" });
+      });
+  }
+
+  async update() {
+    this.table
+      .where("id", this.request.params.id)
+      .update(this.request.body)
+      .then((resp) => this.response.status(204).json())
+      .catch((error) => {
+        console.error(error);
+        this.response.status(500).json({ error: "Internal server error" });
+      });
+  }
 }
 module.exports = ProfilesModel;
