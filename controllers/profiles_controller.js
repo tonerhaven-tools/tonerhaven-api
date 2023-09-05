@@ -17,4 +17,9 @@ router.put("/:id", (req, res) => {
   return profiles;
 });
 
+router.get("/:authId", (req, res) => {
+  const profiles = new ProfilesModel(req, res).get();
+  return profiles;
+});
+
 module.exports = router;

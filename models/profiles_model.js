@@ -22,6 +22,18 @@ class ProfilesModel extends ModelBase {
       });
   }
 
+  async get() {
+    this.table
+      .where("auth_id", this.request.params.authId)
+      .select()
+      .first()
+      .then((response) => this.response.status(200).json(response))
+      .catch((error) => {
+        console.error(error);
+        this.response.status(500).json({ error: "Internal server error" });
+      });
+  }
+
   async add() {
     this.table
       .insert(this.request.body)
