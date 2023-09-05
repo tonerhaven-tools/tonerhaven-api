@@ -1,0 +1,4 @@
+In the root directory of the server:
+npm install -g knex
+knex migrate:latest // or rollback knex migrate:rollback
+knex seed:run
