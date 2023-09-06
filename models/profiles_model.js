@@ -1,5 +1,4 @@
 const ModelBase = require("./base/model_base");
-const bcrypt = require("bcrypt");
 
 class ProfilesModel extends ModelBase {
   constructor(request, response) {
@@ -56,7 +55,7 @@ class ProfilesModel extends ModelBase {
         company: company,
         company_phone: company_phone,
         personal_phone: personal_phone,
-        auth_id: await bcrypt.hash(auth_id, 10),
+        auth_id: auth_id,
       })
       .then((resp) =>
         this.response.status(201).json({
