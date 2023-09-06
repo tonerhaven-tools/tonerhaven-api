@@ -9,6 +9,7 @@ const server_port = 3001;
 const brands_routes = require("./controllers/brands_controller");
 const products_routes = require("./controllers/products_controller");
 const profile_routes = require("./controllers/profiles_controller");
+const acct_checks_routes = require("./controllers/acctchecks_controller");
 
 //Swagger definitions
 const swaggerUi = require("swagger-ui-express");
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/brands", brands_routes);
 app.use("/api/products", products_routes);
 app.use("/api/profiles", profile_routes);
+app.use("/api/check", acct_checks_routes);
 
 // Serve files inside storage
 app.use("/api/storage", express.static(path.join(__dirname, "storage")));
