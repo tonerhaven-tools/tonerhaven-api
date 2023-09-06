@@ -1,4 +1,5 @@
 const ModelBase = require("./base/model_base");
+const bcrypt = require("bcrypt");
 
 class ProfilesModel extends ModelBase {
   constructor(request, response) {
@@ -35,6 +36,8 @@ class ProfilesModel extends ModelBase {
   }
 
   async add() {
+    this.request.body["authId"] = bcrypt.hash(this.request.body["authId"], 10);
+
     this.table
       .insert(this.request.body)
       .then((resp) =>
