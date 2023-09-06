@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ProfilesModel = require("../models/profiles_model");
 
-router.get("/ping/:authId", (req, res) => {
+router.get("/ping", (req, res) => {
   const profiles = new ProfilesModel(req, res).ping();
   return profiles;
 });

@@ -8,7 +8,7 @@ class ProfilesModel extends ModelBase {
 
   async ping() {
     this.table
-      .where("auth_id", this.request.params.authId)
+      .where("auth_id", this.request.headers.auth_id)
       .select()
       .first()
       .then((response) =>
