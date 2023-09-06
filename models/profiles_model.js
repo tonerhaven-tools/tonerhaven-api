@@ -36,10 +36,28 @@ class ProfilesModel extends ModelBase {
   }
 
   async add() {
-    this.request.body["authId"] = bcrypt.hash(this.request.body["authId"], 10);
+    const {
+      first_name,
+      last_name,
+      address,
+      email,
+      company,
+      company_phone,
+      personal_phone,
+      auth_id,
+    } = this.request.body;
 
     this.table
-      .insert(this.request.body)
+      .insert({
+        first_name: first_name,
+        last_name: last_name,
+        address: address,
+        email: email,
+        company: company,
+        company_phone: company_phone,
+        personal_phone: personal_phone,
+        auth_id: await bcrypt.hash(auth_id, 10),
+      })
       .then((resp) =>
         this.response.status(201).json({
           id: resp[0],

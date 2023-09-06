@@ -1,3 +1,4 @@
+const { default: knex } = require("knex");
 const DB = require("../../configs/database/DB");
 
 //acts as base definition for models
@@ -8,6 +9,7 @@ class ModelBase {
     this.request = req;
     this.response = res;
     this.table = DB(table_name);
+    this.database = knex;
   }
 
   //adds prefix on tables
