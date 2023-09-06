@@ -12,7 +12,7 @@ exports.seed = async function (knex) {
       route: "/api/profiles/ping",
       messageTemplate:
         "Welcome aboard! Please take a moment to complete your profile to enhance your experience on our platform.",
-      type: "warning",
+      type: "info",
     },
   ]);
 };
