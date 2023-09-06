@@ -9,7 +9,7 @@ exports.seed = async function (knex) {
     {
       id: 1,
       title: "Welcome to TonerHaven",
-      route: "/api/profile/ping/{{authId}}",
+      route: "/api/profile/ping",
       messageTemplate:
         "Welcome aboard! Please take a moment to complete your profile to enhance your experience on our platform.",
       type: "warning",
