@@ -1,11 +1,11 @@
 const ModelBase = require("./base/model_base");
 
-class ProductsModel extends ModelBase {
+class CategoriesModel extends ModelBase {
   constructor(request, response) {
-    super("toners_parts", request, response);
+    super("categories", request, response);
   }
 
-  async all_products() {
+  async all_categories() {
     try {
       return await this.table.select();
     } catch (error) {
@@ -14,4 +14,4 @@ class ProductsModel extends ModelBase {
     }
   }
 }
-module.exports = ProductsModel;
+module.exports = CategoriesModel;
