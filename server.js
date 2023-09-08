@@ -14,25 +14,16 @@ const profile_routes = require("./controllers/profiles_controller");
 const acct_checks_routes = require("./controllers/acctchecks_controller");
 const dashboard_routes = require("./controllers/dashboard_controller");
 
-const corsOptions = {
-  origin: "https://localhost:5173",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-  optionsSuccessStatus: 204,
-};
-
-// app.use(cors(corsOptions));
-
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // ROUTES > Controllers
-app.use("/api/brands", brands_routes);
-app.use("/api/products", products_routes);
-app.use("/api/profiles", profile_routes);
-app.use("/api/check", acct_checks_routes);
+app.use("/api/brands",    brands_routes);
+app.use("/api/products",  products_routes);
+app.use("/api/profiles",  profile_routes);
+app.use("/api/check",     acct_checks_routes);
 app.use("/api/dashboard", dashboard_routes);
 
 // Serve files inside storage
