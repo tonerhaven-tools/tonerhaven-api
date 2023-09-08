@@ -5,6 +5,19 @@ class ProductsModel extends ModelBase {
     super("toners_parts", request, response);
   }
 
+  async get_product() {
+    // this.response.status(200).json(this.request.params.id);
+    this.table
+      .where({ id: this.request.params.id })
+      .select()
+      .first()
+      .then((response) => this.response.status(200).json(response))
+      .catch((error) => {
+        console.error(error);
+        this.response.status(500).json({ error: "Internal server error" });
+      });
+  }
+
   async all_products() {
     try {
       return await this.table.select();
@@ -18,7 +31,7 @@ class ProductsModel extends ModelBase {
     try {
       const form_values = this.request.body;
       form_values.thumbnail = filename;
-      return await this.table.insert(form_values).returning('*');
+      return await this.table.insert(form_values).returning("*");
     } catch (error) {
       console.error(error);
       throw new Error("Internal server error");
@@ -27,17 +40,16 @@ class ProductsModel extends ModelBase {
 
   async destroy_product() {
     try {
-      const prod_id  = await this.request.body.product_id;
-      const product  = await this.table.where('id',prod_id).first();
-      const filesys  = require('fs').promises;
+      const prod_id = await this.request.body.product_id;
+      const product = await this.table.where("id", prod_id).first();
+      const filesys = require("fs").promises;
       const filepath = `storage/uploads/products/${product.thumbnail}`;
 
       return {
         image_deleted: await filesys.unlink(filepath),
-        product_delete: await this.table.where('id',prod_id).delete(),
-      }
-    }
-    catch (error) {
+        product_delete: await this.table.where("id", prod_id).delete(),
+      };
+    } catch (error) {
       console.error(error);
       throw new Error("Internal server error");
     }
