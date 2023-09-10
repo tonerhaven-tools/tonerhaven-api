@@ -1,3 +1,6 @@
+[build]
+  functions = "functions"
+  publish = "storage"
 [functions]
   external_node_modules = ["express", "pg-query-stream", "better-sqlite3", "oracledb", "mysql2", "pg", "sqlite3", "tedious", ""]
   node_bundler = "esbuild"
@@ -6,3 +9,7 @@
   from = "/*"
   status = 200
   to = "/.netlify/functions/server/:splat"
+[[redirects]]
+  from = "/storage/*"
+  to = "/storage/:splat"
+  status = 200
