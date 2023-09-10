@@ -6,7 +6,3 @@
   from = "/*"
   status = 200
   to = "/.netlify/functions/server/:splat"
-[build]
-  command = "# no build command"
-  functions = "netlify/functions"
-  publish = "storage"
