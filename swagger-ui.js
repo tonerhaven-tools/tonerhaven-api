@@ -1,3 +1,4 @@
+const path = require("path");
 const swaggerAutogen = require("swagger-autogen")();
 
 const doc = {
@@ -9,13 +10,9 @@ const doc = {
   schemes: ["http"],
 };
 
-const outputFile = "./swaggerdoc/swagger.json";
-const endpointsFiles = [`./server.js`];
+const outputFile = "./swagger/swagger.json";
+const endpointsFiles = ["./server.js"];
 
 const swaggergen = swaggerAutogen(outputFile, endpointsFiles, doc);
-
-// .then(() => {
-//   require("./server.js"); // Your project's root file
-// });
 
 module.exports = swaggergen;

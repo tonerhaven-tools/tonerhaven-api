@@ -1,5 +1,5 @@
 [functions]
-  included_files = ["storage/**", "swaggerdoc/**"]
+  included_files = ["storage/**", "swagger/**"]
   external_node_modules = ["express", "pg-query-stream", "better-sqlite3", "oracledb", "mysql2", "pg", "sqlite3", "tedious", ""]
   node_bundler = "esbuild"
 [[redirects]]

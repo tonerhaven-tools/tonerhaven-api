@@ -4,7 +4,6 @@ const serverless = require("serverless-http");
 
 //Swagger definitions
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swaggerdoc/swagger.json");
 
 const app = express();
 const server_port = 3001;
@@ -29,14 +28,11 @@ app.use("/api/dashboard", dashboard_routes);
 
 // Serve files inside storage
 app.use("/storage", express.static(require("path").join(__dirname, "storage")));
-app.use(
-  "/swaggerdoc",
-  express.static(require("path").join(__dirname, "swaggerdoc"))
-);
+app.use("/swagger", express.static(require("path").join(__dirname, "swagger")));
 
 var options = {
   swaggerOptions: {
-    url: "/swaggerdoc/swagger.json",
+    url: "/swagger/swagger.json",
     requestInterceptor: function (request) {
       request.headers.Origin = `http://localhost:3001`;
       return request;
