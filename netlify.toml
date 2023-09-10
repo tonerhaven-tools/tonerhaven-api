@@ -6,8 +6,3 @@
   from = "/*"
   status = 200
   to = "/.netlify/functions/server/:splat"
-[[redirects]]
-  force = true
-  from = "/storage/uploads/products/*"
-  to = "/storage/:splat"
-  status = 200
