@@ -20,10 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // ROUTES > Controllers
-app.use("/api/brands",    brands_routes);
-app.use("/api/products",  products_routes);
-app.use("/api/profiles",  profile_routes);
-app.use("/api/check",     acct_checks_routes);
+app.use("/api/brands", brands_routes);
+app.use("/api/products", products_routes);
+app.use("/api/profiles", profile_routes);
+app.use("/api/check", acct_checks_routes);
 app.use("/api/dashboard", dashboard_routes);
 
 // Serve files inside storage
