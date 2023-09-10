@@ -29,9 +29,25 @@ app.use("/api/dashboard", dashboard_routes);
 
 // Serve files inside storage
 app.use("/storage", express.static(require("path").join(__dirname, "storage")));
+app.use(
+  "/swaggerdoc",
+  express.static(require("path").join(__dirname, "swaggerdoc"))
+);
 
 // swagger docs
-app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(
+  "/swagger",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, {
+    swaggerOptions: {
+      requestInterceptor: function (request) {
+        request.headers.Origin = `http://localhost:3001`;
+        return request;
+      },
+      url: `http://localhost:3001/swagger`,
+    },
+  })
+);
 
 // Node Server Log
 

@@ -24,6 +24,7 @@ class ProductsModel extends ModelBase {
       throw new Error("Internal server error");
     }
   }
+
   async store_product(filename) {
     try {
       const form_values = this.request.body;
@@ -36,13 +37,13 @@ class ProductsModel extends ModelBase {
   }
   async destroy_product() {
     try {
-      const prod_id  = await this.request.body.product_id;
-      const product  = await this.table.where("id", prod_id).first();
+      const prod_id = await this.request.body.product_id;
+      const product = await this.table.where("id", prod_id).first();
 
       let image_deleted = false;
       try {
         if (product.thumbnail.length > 0) {
-          const filesys  = require("fs").promises;
+          const filesys = require("fs").promises;
           const filepath = `storage/uploads/products/${product.thumbnail}`;
           await filesys.access(filepath);
           await filesys.unlink(filepath);
@@ -54,7 +55,7 @@ class ProductsModel extends ModelBase {
 
       return {
         image_deleted: image_deleted,
-        product_deleted: await this.table.where("id",prod_id).delete(),
+        product_deleted: await this.table.where("id", prod_id).delete(),
       };
     } catch (error) {
       console.error(error);
@@ -65,12 +66,17 @@ class ProductsModel extends ModelBase {
     try {
       const form = this.request.body;
       delete form.thumbnail;
-      const update = this.table.where('id',form.id)
-      .update(form).then(count => {console.log(count)}).catch(error => {
-        console.error(error);
-      });
+      const update = this.table
+        .where("id", form.id)
+        .update(form)
+        .then((count) => {
+          console.log(count);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
 
-      return {update, test: "Fuck"};
+      return { update, test: "Fuck" };
     } catch (error) {
       console.error(error);
       throw new Error("Internal server error");
