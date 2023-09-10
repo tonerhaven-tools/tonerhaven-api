@@ -31,7 +31,9 @@ app.use("/api/dashboard", dashboard_routes);
 app.use("/storage", express.static(require("path").join(__dirname, "storage")));
 
 // swagger docs
-app.use(express.static(swaggerDocument));
+app.use(
+  express.static(require("path").join(__dirname, "/swaggerdoc/swagger.json"))
+);
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Node Server Log
