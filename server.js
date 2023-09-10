@@ -4,6 +4,7 @@ const serverless = require("serverless-http");
 
 //Swagger definitions
 const swaggerUi = require("swagger-ui-express");
+const pathToSwaggerUi = require("swagger-ui-dist").absolutePath();
 const swaggerDocument = require("./swaggerdoc/swagger.json");
 
 const app = express();
@@ -19,7 +20,6 @@ const dashboard_routes = require("./controllers/dashboard_controller");
 app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // ROUTES > Controllers
 app.use("/api/brands", brands_routes);
@@ -30,6 +30,10 @@ app.use("/api/dashboard", dashboard_routes);
 
 // Serve files inside storage
 app.use("/storage", express.static(require("path").join(__dirname, "storage")));
+
+// swagger docs
+app.use(express.static(pathToSwaggerUi));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Node Server Log
 
