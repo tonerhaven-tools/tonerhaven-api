@@ -28,6 +28,13 @@ app.use("/api/dashboard", dashboard_routes);
 
 // Serve files inside storage
 app.use("/storage", express.static(require("path").join(__dirname, "storage")));
+app.use(
+  "/storage/uploads/products",
+  express.static(
+    require("path").join(__dirname, "storage", "uploads", "products")
+  )
+);
+
 app.use("/swagger", express.static(require("path").join(__dirname, "swagger")));
 
 var options = {
