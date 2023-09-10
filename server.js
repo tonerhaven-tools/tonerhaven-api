@@ -4,7 +4,6 @@ const serverless = require("serverless-http");
 
 //Swagger definitions
 const swaggerUi = require("swagger-ui-express");
-const pathToSwaggerUi = require("swagger-ui-dist").absolutePath();
 const swaggerDocument = require("./swaggerdoc/swagger.json");
 
 const app = express();
@@ -32,7 +31,7 @@ app.use("/api/dashboard", dashboard_routes);
 app.use("/storage", express.static(require("path").join(__dirname, "storage")));
 
 // swagger docs
-app.use(express.static(pathToSwaggerUi));
+app.use(express.static(swaggerDocument));
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Node Server Log
