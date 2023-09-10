@@ -34,19 +34,21 @@ app.use(
   express.static(require("path").join(__dirname, "swaggerdoc"))
 );
 
+var options = {
+  swaggerOptions: {
+    url: "/swaggerdoc/swagger.json",
+    requestInterceptor: function (request) {
+      request.headers.Origin = `http://localhost:3001`;
+      return request;
+    },
+  },
+};
+
 // swagger docs
 app.use(
   "/swagger",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, {
-    swaggerOptions: {
-      requestInterceptor: function (request) {
-        request.headers.Origin = `http://localhost:3001`;
-        return request;
-      },
-      url: `http://localhost:3001/swagger`,
-    },
-  })
+  swaggerUi.serveFiles(null, options),
+  swaggerUi.setup(null, options)
 );
 
 // Node Server Log
