@@ -19,12 +19,17 @@ router.post("/store-product", upload.single('thumbnail'), async(req,res) => {
   return res.json(insert);
 });
 
+// Update a Product
+router.post("/update-product", async(req,res) => {
+  const Model = new ProductsModel(req, res);
+  return res.json(await Model.update_product());
+});
+
 // Delete a Product
 router.post("/destroy-product", async(req,res) => {
   const destroy = await (new ProductsModel(req, res)).destroy_product();
   return res.json(destroy);
 });
-
 
 // Fetch product information for Dashboard
 router.get("/product-related-data", async (req, res) => {
