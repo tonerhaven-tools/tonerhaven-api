@@ -1,5 +1,4 @@
 node: {
-  __dirname: false;
 }
 plugins: [
   new CopyWebpackPlugin({
