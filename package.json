@@ -7,7 +7,7 @@
     "migrate": "knex migrate:latest && knex seed:run",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "knex migrate:latest && knex seed:run && esbuild server.js --platform=node",
-    "start": "node server.js",
+    "start": "node swagger.js",
     "dev": " nodemon server.js"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "request-ip": "^3.3.0",
     "serverless-http": "^3.2.0",
     "stream": "^0.0.2",
+    "swagger-autogen": "^2.23.5",
     "swagger-ui-express": "^5.0.0"
   }
 }
