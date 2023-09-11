@@ -8,7 +8,7 @@ class BrandsModel extends ModelBase {
   async all_brands() {
     try {
       const result = await this.table.select();
-      this.response.status(200).json(result);
+      return result;
     } catch (error) {
       console.error(error);
       throw new Error("Internal server error");
