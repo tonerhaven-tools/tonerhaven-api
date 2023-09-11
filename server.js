@@ -35,8 +35,6 @@ app.use(
   )
 );
 
-app.use("/swagger", express.static(require("path").join(__dirname, "swagger")));
-
 var options = {
   swaggerOptions: {
     url: "/swagger/swagger.json",
