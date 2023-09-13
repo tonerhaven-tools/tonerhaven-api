@@ -121,6 +121,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -146,6 +149,16 @@
       }
     },
     "/api/dashboard/product-related-data": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/shipping/fedex-estimate-cost": {
       "get": {
         "description": "",
         "responses": {
