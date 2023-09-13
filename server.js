@@ -1,3 +1,4 @@
+process.env.TZ = 'America/New_York';
 const cors = require("cors");
 const express = require("express");
 const serverless = require("serverless-http");
@@ -14,6 +15,7 @@ const products_routes = require("./controllers/products_controller");
 const profile_routes = require("./controllers/profiles_controller");
 const acct_checks_routes = require("./controllers/acctchecks_controller");
 const dashboard_routes = require("./controllers/dashboard_controller");
+const shipping_routes = require("./controllers/shipping_controller");
 
 app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
 app.use(express.json());
@@ -25,6 +27,7 @@ app.use("/api/products", products_routes);
 app.use("/api/profiles", profile_routes);
 app.use("/api/check", acct_checks_routes);
 app.use("/api/dashboard", dashboard_routes);
+app.use("/api/shipping", shipping_routes);
 
 // Serve files inside storage
 app.use("/storage", express.static(require("path").join(__dirname, "storage")));
